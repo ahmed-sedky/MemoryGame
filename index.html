@@ -14,9 +14,18 @@
     <div id= "myBut" class="controls-button animate animated">
         <span>Start Game</span>
     </div>
+    <div id= "win" class=" animate animated win">
+        <span>You Won!</span>
+    </div>
+    <div id= "lose" class=" animate animated lose">
+        <span>You Lose :'(</span>
+    </div>
     <div class="info-container">
         <div class="name">
             Hello: <span></span>
+        </div>
+        <div id="countDown" class="countDown">
+            Time Left: <span></span>
         </div>
         <div class="tries">
             Wrong Tries: <span>0</span>
@@ -159,8 +168,10 @@
     <audio autoplay loop  id="playAudio">
         <source src="Sounds/23265999_access_by_dirtyproductions_preview.mp3">
     </audio>
-    <audio id="lose" src="Sounds/23205030_game-show-buzzer-wrong-answer_by_floraphonic_preview.mp3" preload="auto"></audio>
+    <audio id="wrong" src="Sounds/23205030_game-show-buzzer-wrong-answer_by_floraphonic_preview.mp3" preload="auto"></audio>
     <audio id="success" src="Sounds/23138626_right-answer_by_alurcz_preview.mp3" preload="auto"></audio>
+    <audio id="wining" src="Sounds/23329855_stylish-upbeat-energetic-rock_by_vlad_annenkov_preview.mp3" preload="auto"></audio>
+    <audio id="losing" src="Sounds/23220560_game-show-loser_by_alexander_blu_preview.mp3" preload="auto"></audio>
     <footer>Created By Ahmed Hossam &copy; 2020</footer>
 
     <script src="JS/Main.js"></script>

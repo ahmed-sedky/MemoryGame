@@ -16,11 +16,16 @@ body{
 }
 .info-container .name{
     float: left;
-    width: 50%;
+    width: 33%;
 }
 .info-container .tries{
     float: right;
-    width: 50%;
+    width: 33%;
+    text-align: right;
+}
+.info-container .countDown{
+    float: right;
+    width: 33%;
     text-align: right;
 }
 .memory-game-blocks{
@@ -109,6 +114,55 @@ body{
     cursor: pointer;
     border-radius: 10px;
     animation:zoomInDown 2s ease-in-out;
+}
+.win{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.8);
+    z-index: 3;
+    display: none;
+}
+.win span{
+    background-color: #2196f3;
+    color: white;
+    font-size: 60px;
+    text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 20px;
+    cursor: pointer;
+    border-radius: 10px;
+    animation:flip 2s ease-in-out;
+}
+.lose{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.8);
+    z-index: 3;
+    display: none;
+}
+.lose span{
+    background-color: red;
+    color: white;
+    color: white;
+    font-size: 60px;
+    text-align: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 20px;
+    cursor: pointer;
+    border-radius: 10px;
+    animation:ShakeX 2s ease-in-out;
 }
 
 footer{
