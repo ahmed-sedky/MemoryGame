@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../CSS/style.css">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
+    />
     <title>Memory GAME</title>
 </head>
 <body>
-    <div id= "myBut" class="controls-button">
+    <div id= "myBut" class="controls-button animate animated">
         <span>Start Game</span>
     </div>
     <div class="info-container">
@@ -140,17 +144,23 @@
             </div>
         </div>
     </div>
-    <iframe src="../23115170_game-show-waiting-timer_by_waderman_preview.mp3" allow="autoplay" style="display:none" id="iframeAudio">
-    </iframe> 
+    <!--<div class="leaderBoard">
+        <h2>LeaderBord</h2>
+        <ol>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ol>
+    </div>-->
+    
 
     <audio autoplay loop  id="playAudio">
         <source src="../23265999_access_by_dirtyproductions_preview.mp3">
     </audio>
-    
-
     <audio id="lose" src="../23205030_game-show-buzzer-wrong-answer_by_floraphonic_preview.mp3" preload="auto"></audio>
     <audio id="success" src="../23138626_right-answer_by_alurcz_preview.mp3" preload="auto"></audio>
-    <audio src="../23115170_game-show-waiting-timer_by_waderman_preview.mp3" preload="auto"></audio>
     <footer>Created By Ahmed Hossam &copy; 2020</footer>
 
     <script src="../JS/Main.js"></script>

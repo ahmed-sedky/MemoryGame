@@ -1,13 +1,19 @@
+var myName =localStorage.getItem('playerName');
+console.log(myName);
 document.getElementById('myBut').onclick =function(){
     document.getElementById('playAudio').play();
     var yourName =prompt("what's your name?");
+    
     if(yourName ==null || yourName == ""){
-        document.querySelector('.name span').textContent = 'unknown';
+            document.querySelector('.name span').textContent = 'unknown';
     }else{
         document.querySelector('.name span').textContent = yourName;
+        console.log('hey')
     }
     document.querySelector(".controls-button").remove();
-}
+    }
+    localStorage.setItem('playerName',document.querySelector('.name span').textContent) ;
+
 var blockContainer =document.querySelector(".memory-game-blocks"),
     duration = 1000,
     blocks = Array.from(blockContainer.children),
