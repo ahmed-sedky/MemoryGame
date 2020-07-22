@@ -126,12 +126,12 @@ document.getElementById('myBut').onclick =function(){
     if(localStorage.getItem('player-name1') == "" ){
         localStorage.setItem('player-name1', document.querySelector('.name span').textContent) ;
     }
-    else if( localStorage.getItem('player-name2') == ""){
+    else if( localStorage.getItem('player-name1') != ""&&  localStorage.getItem('player-name2') == ""){
         localStorage.setItem('player-name2', document.querySelector('.name span').textContent) ;
-    } else if(localStorage.getItem('player-name3') == ""){
+    } else if(localStorage.getItem('player-name1') != ""&&  localStorage.getItem('player-name2') != "" && localStorage.getItem('player-name3') == ""){
         localStorage.setItem('player-name3', document.querySelector('.name span').textContent) ;
     }
-    else if(localStorage.getItem('player-name4') == ""){
+    else if(localStorage.getItem('player-name1') != ""&&  localStorage.getItem('player-name2') != "" && localStorage.getItem('player-name3') != "" && localStorage.getItem('player-name4') == ""){
         localStorage.setItem('player-name4', document.querySelector('.name span').textContent) ;
     }
     else {
