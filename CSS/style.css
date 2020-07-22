@@ -4,7 +4,7 @@
 body{
     font-style: arial,Tahoma;
 }
-.info-container {
+.info-container ,.leaderBoard {
     width: 900px;
     margin: 20px auto 0;
     padding: 20px;
@@ -12,7 +12,51 @@ body{
     background-color: #f6f6f6;
     overflow: hidden;
     border: 2px solid #2196f3;
-
+    position: relative;
+}
+.leaderBoard{
+    border-radius: 10px;
+}
+.leaderBoard h2{
+    color:black;
+    font-size: 30px;
+    -webkit-text-shadow: 
+    3px 5px 7px #ffa50096, 
+    1px 2px 2px #f4de36ab;
+    -moz-text-shadow: 
+    3px 5px 7px #ffa50096, 
+    1px 2px 2px #f4de36ab;
+    -o-text-shadow: 
+    3px 5px 7px #ffa50096, 
+    1px 2px 2px #f4de36ab;
+    -ms-text-shadow: 
+    3px 5px 7px #ffa50096, 
+    1px 2px 2px #f4de36ab;
+    text-shadow: 
+                    3px 5px 7px #ffa50096, 
+                    1px 2px 2px #f4de36ab;
+}
+.leaderBoard ol li i{
+    color: gold;
+}
+.leaderBoard ol li .right{
+    position: absolute;
+    right:50px;
+}
+.leaderBoard ol li span mark{
+    background-color: transparent;
+}
+.instructions{
+    position: absolute;
+    padding: 15px;
+    top: 150px;
+    left: 20px;
+    border: 2px solid  #2196f3;
+    background-color: #f6f6f6;
+    border-radius: 10px;
+}
+.instructions h2{
+    color: maroon;
 }
 .info-container .name{
     float: left;
@@ -125,6 +169,22 @@ body{
     z-index: 3;
     display: none;
 }
+.win div{
+    margin:20px; 
+    text-align: center;
+    width:400px;
+    font-size: 60px;
+    color: white;
+    padding: 20px;
+    background-color: rgb(32, 203, 255);
+    border: 2px solid black;
+    cursor: pointer;
+    border-radius: 10px;
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
 .win span{
     background-color: #2196f3;
     color: white;
@@ -135,7 +195,6 @@ body{
     left: 50%;
     transform: translate(-50%,-50%);
     padding: 20px;
-    cursor: pointer;
     border-radius: 10px;
     animation:flip 2s ease-in-out;
 }
@@ -168,7 +227,7 @@ body{
 footer{
     color: white;
     background-color: black;
-    margin: auto;
+    margin: 20px auto 0;
     padding: 10px;
     text-align: center;
 }

@@ -8,14 +8,20 @@
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"
     />
+    <script src="https://kit.fontawesome.com/be14abca77.js" crossorigin="anonymous"></script>
     <title>Memory GAME</title>
 </head>
 <body>
     <div id= "myBut" class="controls-button animate animated">
         <span>Start Game</span>
     </div>
+    <div class="instructions">
+        <h2>Instructions</h2>
+        <p> Flip Each 2 Similar photos to win </p>
+    </div>
     <div id= "win" class=" animate animated win">
         <span>You Won!</span>
+        <div> Play Again</div>
     </div>
     <div id= "lose" class=" animate animated lose">
         <span>You Lose :'(</span>
@@ -153,21 +159,25 @@
             </div>
         </div>
     </div>
-    <!--<div class="leaderBoard">
+    <div class="leaderBoard">
         <h2>LeaderBord</h2>
         <ol>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li><i class="fas fa-crown"></i><span id="name1">Ahmed</span>   <span class="right" >Score :<mark id="score1"></mark> </span></li> 
+            <li><span id="name2">Hossam</span>   <span class="right" >Score :<mark id="score2">8</mark> </span></li>
+            <li><span id="name3">mohamed</span>   <span class="right" >Score :<mark id="score3">9</mark> </span> </li>
+            <li><span id="name4">sedky</span>   <span class="right" >Score :<mark id="score4">12</mark> </span></li>
+            <li><span id="name5">hassan</span>   <span class="right" >Score :<mark id="score5">15</mark> </span></li>
         </ol>
-    </div>-->
+        
+    </div>
     
 
     <audio autoplay loop  id="playAudio">
         <source src="Sounds/23265999_access_by_dirtyproductions_preview.mp3">
     </audio>
+    <audio id="clock" src="Sounds/23170854_clock-ticking_by_jabameister_preview.mp3" preload="auto"></audio>
+    <audio id="fast-clock" src="Sounds/23257400_fast-clock-ticking-02_by_jabameister_preview.mp3" preload="auto"></audio>
+
     <audio id="wrong" src="Sounds/23205030_game-show-buzzer-wrong-answer_by_floraphonic_preview.mp3" preload="auto"></audio>
     <audio id="success" src="Sounds/23138626_right-answer_by_alurcz_preview.mp3" preload="auto"></audio>
     <audio id="wining" src="Sounds/23329855_stylish-upbeat-energetic-rock_by_vlad_annenkov_preview.mp3" preload="auto"></audio>
