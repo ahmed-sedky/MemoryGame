@@ -36,8 +36,41 @@ var count =setInterval(function(){
 },1000);
 
 //get the data from the local storage
-var myName =localStorage.getItem('player-name'),
-    myScore =localStorage.getItem('player-score');
+var myName1 =localStorage.getItem('player-name1'),
+    myScore1 =localStorage.getItem('player-score1'),
+    myName2 =localStorage.getItem('player-name2'),
+    myScore2 =localStorage.getItem('player-score2'),
+    myName3 =localStorage.getItem('player-name3'),
+    myScore3 =localStorage.getItem('player-score3'),
+    myName4 =localStorage.getItem('player-name4'),
+    myScore4 =localStorage.getItem('player-score4'),
+    myName5 =localStorage.getItem('player-name5'),
+    myScore5 =localStorage.getItem('player-score5');
+
+    
+    if (myScore1 == null){
+        myScore1 = "50";
+    }
+    if (myScore2 == null){
+        myScore2 = "50";
+    } if (myScore3 == null){
+        myScore3 = "50";
+    } if (myScore4 == null){
+        myScore4 = "50";
+    } if (myScore5 == null){
+        myScore5 = "50";
+    }
+    myScore = myScore1 + " " + myScore2 + " " + myScore3 + " " + myScore4 + " " + myScore5;
+    scoreArray = myScore.split(" ");
+    scoreArray = scoreArray.sort();
+    myScore1 = scoreArray[0];
+    myScore2 = scoreArray[1];
+    myScore3 = scoreArray[2];
+    myScore4 = scoreArray[3];
+    myScore5 = scoreArray[4];
+
+    console.log("score : " +scoreArray)
+
 /*
 var myOldScore = ["100"],
     myScore = [],
@@ -55,10 +88,18 @@ var myOldScore = ["100"],
     
     */
 
-    document.getElementById('name1').textContent = myName;
-    document.getElementById('score1').textContent = myScore;
-console.log(myName);
-console.log(myScore);
+    document.getElementById('name1').textContent = myName1;
+    document.getElementById('score1').textContent = myScore1;
+    document.getElementById('name2').textContent = myName2;
+    document.getElementById('score2').textContent = myScore2;
+    document.getElementById('name3').textContent = myName3;
+    document.getElementById('score3').textContent = myScore3;
+    document.getElementById('name4').textContent = myName4;
+    document.getElementById('score4').textContent = myScore4;
+    document.getElementById('name5').textContent = myName5;
+    document.getElementById('score5').textContent = myScore5;
+console.log(myName1 + myName2 +myName3 +myName4 +myName5);
+console.log(myScore1 + " "+ myScore2 + " "+myScore3+" " +myScore4+" " +myScore5);
 
 // Start Button
 
@@ -67,7 +108,6 @@ document.getElementById('myBut').onclick =function(){
     document.getElementById('playAudio').play();
     // call the timer function
     timeDown();
-    
     
     //put the player name in the info
     var yourName =prompt("what's your name?");
@@ -78,7 +118,31 @@ document.getElementById('myBut').onclick =function(){
         document.querySelector('.name span').textContent = yourName;
     }
     document.querySelector(".controls-button").remove();
-    localStorage.setItem('player-name', document.querySelector('.name span').textContent) ;
+
+    
+
+
+    if(localStorage.getItem('player-name1') == "" ){
+        localStorage.setItem('player-name1', document.querySelector('.name span').textContent) ;
+    }
+    else if( localStorage.getItem('player-Name1') != "" && localStorage.getItem('player-name2') == ""){
+        localStorage.setItem('player-name2', document.querySelector('.name span').textContent) ;
+    } else if(localStorage.getItem('player-name3') == ""){
+        localStorage.setItem('player-name3', document.querySelector('.name span').textContent) ;
+    }
+    else if(localStorage.getItem('player-name4') == ""){
+        localStorage.setItem('player-name4', document.querySelector('.name span').textContent) ;
+    }
+    else {
+        localStorage.setItem('player-name5', document.querySelector('.name span').textContent) ;
+    }
+    
+    console.log("player1 is : " +localStorage.getItem('player-name1'));
+    console.log("player2 is : " +localStorage.getItem('player-name2'));
+    console.log("player3 is : " +localStorage.getItem('player-name3'));
+    console.log("player4 is : " +localStorage.getItem('player-name4'));
+    console.log("player5 is :" +localStorage.getItem('player-name5'));
+
     }
     
 
@@ -140,7 +204,21 @@ var blockContainer =document.querySelector(".memory-game-blocks"),
             reset(winingBlocks);
             document.getElementById('playAudio').pause();
             document.getElementById('wining').play();
-            localStorage.setItem('player-score', document.querySelector('.tries span').textContent ) ;
+            
+            if(localStorage.getItem('player-score1') == "" ){
+                localStorage.setItem('player-score1', document.querySelector('.tries span').textContent) ;
+            }
+            else if( localStorage.getItem('player-score2') != "" && localStorage.getItem('player-score2') == ""){
+                localStorage.setItem('player-score2', document.querySelector('.tries span').textContent) ;
+            } else if(localStorage.getItem('player-score3') == ""){
+                localStorage.setItem('player-score3', document.querySelector('.tries span').textContent) ;
+            }
+            else if(localStorage.getItem('player-score4') == ""){
+                localStorage.setItem('player-score4', document.querySelector('.tries span').textContent) ;
+            }
+            else {
+                localStorage.setItem('player-score5', document.querySelector('.tries span').textContent) ;
+            }
         }
 
         if(countDown.textContent == "00:00:10"){
