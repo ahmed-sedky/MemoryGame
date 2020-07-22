@@ -169,6 +169,9 @@ body{
     z-index: 3;
     display: none;
 }
+canvas{
+    background:#000;
+  }
 .win div{
     margin:20px; 
     text-align: center;

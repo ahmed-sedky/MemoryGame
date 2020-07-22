@@ -36,6 +36,7 @@ var count =setInterval(function(){
 },1000);
 
 //get the data from the local storage
+
 var myName1 =localStorage.getItem('player-name1'),
     myScore1 =localStorage.getItem('player-score1'),
     myName2 =localStorage.getItem('player-name2'),
@@ -62,42 +63,42 @@ var myName1 =localStorage.getItem('player-name1'),
     }
     myScore = myScore1 + " " + myScore2 + " " + myScore3 + " " + myScore4 + " " + myScore5;
     scoreArray = myScore.split(" ");
-    scoreArray = scoreArray.sort();
+    scoreArray.sort(function(a, b){return a-b});
     myScore1 = scoreArray[0];
     myScore2 = scoreArray[1];
     myScore3 = scoreArray[2];
     myScore4 = scoreArray[3];
     myScore5 = scoreArray[4];
 
+    var myPlayer1 = new Object();
+        myPlayer1.name =myName1;
+        myPlayer1.score =myScore1;
+    var myPlayer2 = new Object();
+        myPlayer2.name =myName2;
+        myPlayer2.score =myScore2;
+    var myPlayer3 = new Object();
+        myPlayer3.name =myName3;
+        myPlayer3.score =myScore3;
+    var myPlayer4 = new Object();
+        myPlayer4.name =myName4;
+        myPlayer4.score =myScore4;
+    var myPlayer5 = new Object();
+        myPlayer5.name =myName5;
+        myPlayer5.score =myScore5;
+
     console.log("score : " +scoreArray)
 
-/*
-var myOldScore = ["100"],
-    myScore = [],
-    myOldName = ["unknown"],
-    myName = [];
 
-    for(var i = 1 ; i < 100 ;i++){
-        if(myOldScore.length == i){
-            myScore.unshift(localStorage.getItem('player-score'));
-        }
-        if(myOldName.length == i){
-            myName.unshift(localStorage.getItem('player-name'));
-        }
-    }
-    
-    */
-
-    document.getElementById('name1').textContent = myName1;
-    document.getElementById('score1').textContent = myScore1;
-    document.getElementById('name2').textContent = myName2;
-    document.getElementById('score2').textContent = myScore2;
-    document.getElementById('name3').textContent = myName3;
-    document.getElementById('score3').textContent = myScore3;
-    document.getElementById('name4').textContent = myName4;
-    document.getElementById('score4').textContent = myScore4;
-    document.getElementById('name5').textContent = myName5;
-    document.getElementById('score5').textContent = myScore5;
+    document.getElementById('name1').textContent = myPlayer1.name;
+    document.getElementById('score1').textContent = myPlayer1.score;
+    document.getElementById('name2').textContent = myPlayer2.name;
+    document.getElementById('score2').textContent = myPlayer2.score;
+    document.getElementById('name3').textContent = myPlayer3.name;
+    document.getElementById('score3').textContent = myPlayer3.score;
+    document.getElementById('name4').textContent = myPlayer4.name;
+    document.getElementById('score4').textContent = myPlayer4.score;
+    document.getElementById('name5').textContent = myPlayer5.name;
+    document.getElementById('score5').textContent = myPlayer5.score;
 console.log(myName1 + myName2 +myName3 +myName4 +myName5);
 console.log(myScore1 + " "+ myScore2 + " "+myScore3+" " +myScore4+" " +myScore5);
 
@@ -125,7 +126,7 @@ document.getElementById('myBut').onclick =function(){
     if(localStorage.getItem('player-name1') == "" ){
         localStorage.setItem('player-name1', document.querySelector('.name span').textContent) ;
     }
-    else if( localStorage.getItem('player-Name1') != "" && localStorage.getItem('player-name2') == ""){
+    else if( localStorage.getItem('player-name2') == ""){
         localStorage.setItem('player-name2', document.querySelector('.name span').textContent) ;
     } else if(localStorage.getItem('player-name3') == ""){
         localStorage.setItem('player-name3', document.querySelector('.name span').textContent) ;
@@ -208,7 +209,7 @@ var blockContainer =document.querySelector(".memory-game-blocks"),
             if(localStorage.getItem('player-score1') == "" ){
                 localStorage.setItem('player-score1', document.querySelector('.tries span').textContent) ;
             }
-            else if( localStorage.getItem('player-score2') != "" && localStorage.getItem('player-score2') == ""){
+            else if(localStorage.getItem('player-score2') == ""){
                 localStorage.setItem('player-score2', document.querySelector('.tries span').textContent) ;
             } else if(localStorage.getItem('player-score3') == ""){
                 localStorage.setItem('player-score3', document.querySelector('.tries span').textContent) ;
@@ -243,7 +244,52 @@ var blockContainer =document.querySelector(".memory-game-blocks"),
     function reset(winBlocks){
         document.getElementById('win').onclick =function(){
             document.getElementById('win').style.display = 'none';
-            document.getElementById('score1').textContent = document.querySelector('.tries span').textContent;
+            //score to the leaderboard
+            myScore3 = document.querySelector('.tries span').textContent;
+            shuffle(orderRange);
+            myScore = myScore1 + " " + myScore2 + " " + myScore3 + " " + myScore4 + " " + myScore5;
+            var scoreArray = myScore.split(" ");
+            scoreArray.sort(function(a,b){return a-b})
+            myScore1 = scoreArray[0];
+            myScore2 = scoreArray[1];
+            myScore3 = scoreArray[2];
+            myScore4 = scoreArray[3];
+            myScore5 = scoreArray[4];
+            console.log(myScore1+" "+myScore2 + " " + myScore3 + " " +myScore4 + " "+myScore5);
+
+            var myPlayer1 = new Object();
+                myPlayer1.name =myName1;
+                myPlayer1.score =myScore1;
+            var myPlayer2 = new Object();
+                myPlayer2.name =myName2;
+                myPlayer2.score =myScore2;
+            var myPlayer3 = new Object();
+                myPlayer3.name =myName3;
+                myPlayer3.score =myScore3;
+            var myPlayer4 = new Object();
+                myPlayer4.name =myName4;
+                myPlayer4.score =myScore4;
+            var myPlayer5 = new Object();
+                myPlayer5.name =myName5;
+                myPlayer5.score =myScore5;
+            document.getElementById('score1').textContent = myPlayer1.score;
+            document.getElementById('score2').textContent = myPlayer2.score;
+            document.getElementById('score3').textContent = myPlayer3.score;
+            document.getElementById('score4').textContent = myPlayer4.score;
+            document.getElementById('score5').textContent = myPlayer5.score;
+
+
+            var yourName =prompt("what's your name?");
+    
+            if(yourName ==null || yourName == ""){
+                    document.querySelector('.name span').textContent = 'unknown';
+                    myPlayer5.name= document.querySelector('.name span').textContent ;
+                    document.getElementById('name5').textContent = myPlayer5.name;
+            }else{
+                document.querySelector('.name span').textContent = yourName;
+                myPlayer5.name = document.querySelector('.name span').textContent;
+                document.getElementById('name5').textContent = myPlayer5.name;
+            }
             document.querySelector('.tries span').textContent = 0; 
             document.getElementById('wining').pause();
             seconds = 120;
@@ -290,3 +336,128 @@ var blockContainer =document.querySelector(".memory-game-blocks"),
     (2) current element = random element
     (3) random element = temp "stach"
     */
+
+
+window.addEventListener("resize", resizeCanvas, false);
+window.addEventListener("DOMContentLoaded", onLoad, false);
+
+window.requestAnimationFrame = 
+    window.requestAnimationFrame       || 
+    window.webkitRequestAnimationFrame || 
+    window.mozRequestAnimationFrame    || 
+    window.oRequestAnimationFrame      || 
+    window.msRequestAnimationFrame     || 
+    function (callback) {
+        window.setTimeout(callback, 1000/60);
+    };
+
+var canvas, ctx, w, h, particles = [], probability = 0.04,
+    xPoint, yPoint;
+
+
+
+
+
+function onLoad() {
+    canvas = document.getElementById("canvas");
+    ctx = canvas.getContext("2d");
+    resizeCanvas();
+    
+    window.requestAnimationFrame(updateWorld);
+} 
+
+function resizeCanvas() {
+    if (!!canvas) {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+    }
+} 
+
+function updateWorld() {
+    update();
+    paint();
+    window.requestAnimationFrame(updateWorld);
+} 
+
+function update() {
+    if (particles.length < 500 && Math.random() < probability) {
+        createFirework();
+    }
+    var alive = [];
+    for (var i=0; i<particles.length; i++) {
+        if (particles[i].move()) {
+            alive.push(particles[i]);
+        }
+    }
+    particles = alive;
+} 
+
+function paint() {
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.fillStyle = "rgba(0,0,0,0.2)";
+    ctx.fillRect(0, 0, w, h);
+    ctx.globalCompositeOperation = 'lighter';
+    for (var i=0; i<particles.length; i++) {
+        particles[i].draw(ctx);
+    }
+} 
+
+function createFirework() {
+    xPoint = Math.random()*(w-200)+100;
+    yPoint = Math.random()*(h-200)+100;
+    var nFire = Math.random()*50+100;
+    var c = "rgb("+(~~(Math.random()*200+55))+","
+        +(~~(Math.random()*200+55))+","+(~~(Math.random()*200+55))+")";
+    for (var i=0; i<nFire; i++) {
+        var particle = new Particle();
+        particle.color = c;
+        var vy = Math.sqrt(25-particle.vx*particle.vx);
+        if (Math.abs(particle.vy) > vy) {
+            particle.vy = particle.vy>0 ? vy: -vy;
+        }
+        particles.push(particle);
+    }
+} 
+
+function Particle() {
+    this.w = this.h = Math.random()*4+1;
+    
+    this.x = xPoint-this.w/2;
+    this.y = yPoint-this.h/2;
+    
+    this.vx = (Math.random()-0.5)*10;
+    this.vy = (Math.random()-0.5)*10;
+    
+    this.alpha = Math.random()*.5+.5;
+    
+    this.color;
+} 
+
+Particle.prototype = {
+    gravity: 0.05,
+    move: function () {
+        this.x += this.vx;
+        this.vy += this.gravity;
+        this.y += this.vy;
+        this.alpha -= 0.01;
+        if (this.x <= -this.w || this.x >= screen.width ||
+            this.y >= screen.height ||
+            this.alpha <= 0) {
+                return false;
+        }
+        return true;
+    },
+    draw: function (c) {
+        c.save();
+        c.beginPath();
+        
+        c.translate(this.x+this.w/2, this.y+this.h/2);
+        c.arc(0, 0, this.w, 0, Math.PI*2);
+        c.fillStyle = this.color;
+        c.globalAlpha = this.alpha;
+        
+        c.closePath();
+        c.fill();
+        c.restore();
+    }
+} 
