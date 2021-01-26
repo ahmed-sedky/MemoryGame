@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- , filename='css/backend.css' -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+
+    <link rel="icon" type="image/png" href="https://i.ibb.co/7y12V0s/Logo.png"/>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <script src="https://kit.fontawesome.com/be14abca77.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Memory GAME</title>
+</head>
+<body>
+    <div id= "win" class=" animate animated win">
+        <span> You Won!</span>
+        <canvas id="canvas"></canvas>
+        <div id="win2">Play Again </div>
+    </div>
+    <div id= "lose" class=" animate animated lose">
+        <span> GAME OVER </span>
+    </div>
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="https://i.ibb.co/7y12V0s/Logo.png" alt="">
+                    Memo Game</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 mr-auto">
+                        <li class="nav-item">
+                            <div class="name">
+                                <span>{{session['username']}}</span>
+                            </div>
+                        </li>
+                        {% if mode_game %}
+                        <li class="nav-item">
+                            <div id= "countDown" class="countdown">
+                                <span></span>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="tries">
+                                Wrong Tries: <span>0</span>
+                            </div>
+                        </li>
+                        {% endif %}
+                    </ul>    
+                        <form action="http://127.0.0.1:5000/main/{{mode_game}}" method="POST" class="login" style="display: none;">
+                            <h3 class="text-center">Login</h3>
+                            <input class="form-control" type="text" id="score3" name="tries" placeholder="UserName" value="">
+                            <input class="form-control" type="text" id="minutes3" name="minutes" placeholder="Password" value="" >
+                            <input class="form-control me-2" type="text" id="mode" name="mode" value="{{mode_game}}" placeholder="Type easy or medium or hard" aria-label="Search">
+                            <input type="submit" value="Login" id="submit" class="btn btn-primary btn-block ">
+                        </form>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">    
+                        <li class="nav-item">
+                            <div class="score">
+                                <a href="http://127.0.0.1:5000/score" class="btn  btn-sm"> View Score</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="score">
+                                <a href="http://127.0.0.1:5000/mode" class="btn  btn-sm"> Play</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="score">
+                                <a href="http://127.0.0.1:5000/" class="btn  btn-sm">Sign In</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="score">
+                                <a href="http://127.0.0.1:5000/register" class="btn btn btn-sm">Register</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <div class="score">
+                                <a href="http://127.0.0.1:5000/logout" class="btn btn btn-sm">LogOut</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                </div>
+            </nav>
+    </div>
+    {% block main %}
+    <div id= "myBut" class="controls-button animate animated">
+        <span>Start Game </span>
+    </div>
+    <div class="{{contain2}} ">
+        <div class="memory-game-blocks mx-auto">
+            <div class="{{contain2}} d-flex flex-wrap ">
+                <div class="row {{class2}}">
+                    <div class="col">
+                        <div class="game-block" data-technology="angular">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                
+                                <img src="{{ url_for('static', filename='photos/angular.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="angular">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/angular.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="python">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/python.jpg') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="python">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/python.jpg') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="github">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/github.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="github">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/github.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="js">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/js.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="js">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/js.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="html">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/Html.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="html">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/Html.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="css">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/css.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="css">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/css.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="anmi2">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/anmi2.jpg') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="anmi2">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/anmi2.jpg') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="anmi3">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/anmi3.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="anmi3">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/anmi3.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="anmi1">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/anmi1.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="anmi1">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/anmi1.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    {% if mode_game == 'medium'%}
+                    <div class="col">
+                        <div class="game-block" data-technology="obama">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/obama.jpg') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="obama">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/obama.jpg') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="semba">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/download.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="semba">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/download.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="ben10">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/images.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="ben10">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/images.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if mode_game == 'hard'%}
+                    <div class="col">
+                        <div class="game-block" data-technology="semba">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/download.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="semba">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/download.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="ben10">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/images.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="ben10">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/images.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="mouse">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/4-2-cartoon-transparent.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="mouse">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/4-2-cartoon-transparent.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="anmi4">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/xray scan.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="anmi4">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/xray scan.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="sbongepop">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/7-2-cartoon-picture.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="spongepop">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/7-2-cartoon-picture.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="jery">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/images2.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="jery">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/images2.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if mode_game == 'ultimate'%}
+                    <div class="col">
+                        <div class="game-block" data-technology="semba">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/download.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="semba">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/download.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="ben10">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/images.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="ben10">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/images.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="mouse">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/4-2-cartoon-transparent.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="mouse">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/4-2-cartoon-transparent.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="anmi4">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/xray scan.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="anmi4">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/xray scan.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="spongepop">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/7-2-cartoon-picture.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="spongepop">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/7-2-cartoon-picture.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="jery">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/images2.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="jery">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/images2.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="sea">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/unnamed.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="sea">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/unnamed.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="dragonBall">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/download.jpg') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="dragonBall">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/download.jpg') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="sabekWLa7ek">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/download3.jpg') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="sabekWLa7ek">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/download3.jpg') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col">
+                        <div class="game-block" data-technology="arnab">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/images3.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="arnab">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/images3.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="comedy">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/download4.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="game-block" data-technology="comedy">
+                            <div class="face front"></div>
+                            <div class="face back">
+                                <img src="{{ url_for('static', filename='photos/download4.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div> -->
+                    {% endif %}
+                </div> 
+            </div>
+    
+        </div>
+        <audio autoplay loop  id="playAudio">
+            <source src="{{ url_for('static', filename='sounds/The three secrets.mp3') }}">
+        </audio>
+        <audio id="lose" src="{{ url_for('static', filename='sounds/23205030_game-show-buzzer-wrong-answer_by_floraphonic_preview.mp3') }}" preload="auto"></audio>
+        
+        <audio id="success" src="{{ url_for('static', filename='sounds/23138626_right-answer_by_alurcz_preview.mp3') }}" preload="auto"></audio>
+        
+        <audio id="clock" src="{{ url_for('static', filename='sounds/23170854_clock-ticking_by_jabameister_preview.mp3') }}" preload="auto"></audio>
+        
+        <audio id="fast-clock" src="{{ url_for('static', filename='sounds/23257400_fast-clock-ticking-02_by_jabameister_preview.mp3') }}" preload="auto"></audio>
+        <audio id="wrong" src="{{ url_for('static', filename='sounds/23205030_game-show-buzzer-wrong-answer_by_floraphonic_preview.mp3') }}" preload="auto"></audio>
+        
+        <audio id="success" src="{{ url_for('static', filename='sounds/23138626_right-answer_by_alurcz_preview.mp3') }}" preload="auto"></audio>
+        
+        <audio id="wining" src="{{ url_for('static', filename='sounds/23329855_stylish-upbeat-energetic-rock_by_vlad_annenkov_preview.mp3') }}" preload="auto"></audio>
+        
+        <audio id="losing" src="{{ url_for('static', filename='sounds/23220560_game-show-loser_by_alexander_blu_preview.mp3') }}" preload="auto"></audio>
+        <footer>Created By Ahmed Hossam &copy; 2020</footer>
+    </div>
+    <script src="{{ url_for('static', filename='js/Main.js') }}"></script>
+    {% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+</body>
+</html>

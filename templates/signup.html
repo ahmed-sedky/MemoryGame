@@ -1,0 +1,15 @@
+{% extends "index.html"%}
+{% block main %}    
+<form action="http://127.0.0.1:5000/register" method="POST" class="login text-center">
+    <h3 class="text-center">Register</h3>
+    <input class="form-control" type="text" name="username" placeholder="UserName" >
+    <input class="form-control" type="password" name="password" placeholder="Password" >
+    <input type="submit" value="SignUp" class="btn btn-block ">
+</form>
+<img class = "tnen animate__animated animate__fadeInRight" src="{{ url_for('static', filename='photos/xray scan.png') }}" alt="">
+{%if Msg%}
+<div class="alert alert-danger msg" role="alert" style="position: fixed;">
+    {{Msg}}
+</div>
+{%endif%}
+{% endblock %}
